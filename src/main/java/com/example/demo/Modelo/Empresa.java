@@ -1,8 +1,5 @@
 package com.example.demo.Modelo;
 
-import java.awt.List;
-import java.util.ArrayList;
-
 
 public class Empresa {
 	private Long NroContrato;

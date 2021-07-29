@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.example.demo.Modelo.Empresa;
+import com.example.demo.Modelo.Movimiento;
 
 //import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,16 +17,25 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
     private StringBuilder currentValue = new StringBuilder();
     List<Empresa> result;
     Empresa empresa;
+    List<Movimiento> result2;
+    Movimiento movimiento;
     
     
     public List<Empresa> getResult() {
         return result;
     }
+    
+    public List<Movimiento> getResult2() {
+        return result2;
+    }
 
     @Override
     public void startDocument() {
         result = new ArrayList<>();
+        result2 = new ArrayList<>();
     }
+    
+    
 
     @Override
     public void startElement(
@@ -41,9 +51,14 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
     	
         //System.out.println(qName);
         
-        // start of loop
+        // start of loop Empresas
         if (qName.equalsIgnoreCase("Empresa")) {
         	empresa = new Empresa();
+        }
+        
+     // start of loop Movimientos
+        if (qName.equalsIgnoreCase("Movimiento")) {
+        	movimiento = new Movimiento();
         }
 
         
@@ -62,6 +77,13 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
             	System.out.println("No se encuentra el formato correcto en Nro Contrato " + currentValue.toString() );
             	e.printStackTrace();
             }    
+            /*try {
+            	movimiento.setNroContrato(Long.parseLong(currentValue.toString()));
+            }
+            catch(NumberFormatException e) {
+            	System.out.println("No se encuentra el formato correcto en Nro Contrato " + currentValue.toString() );
+            	e.printStackTrace();
+            }   */ 
         }
         if (qName.equalsIgnoreCase("CUIT")) {
             empresa.setCUIT(currentValue.toString());
@@ -88,10 +110,43 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
         if (qName.equalsIgnoreCase("Productor")) {
         	empresa.setPRODUCTOR(currentValue.toString());
         }
+        
+        //Tags Específicos de Movimientos
+        
+        if (qName.equalsIgnoreCase("SaldoCtaCte")) {
+        	movimiento.setNroContrato(empresa.getNroContrato());
+        	try {
+        		movimiento.setSaldoCtaCte(Double.valueOf(currentValue.toString()));
+            }
+            catch(NumberFormatException e) {
+            	System.out.println("No se encuentra el formato correcto en SaldoCtaCte " + currentValue.toString() );
+            	e.printStackTrace();
+            }
+        }
+        
+        if (qName.equalsIgnoreCase("Concepto")) {
+        	movimiento.setConcepto(currentValue.toString());
+        }
+        
+        if (qName.equalsIgnoreCase("Importe")) {
+        	try {
+        		movimiento.setImporte(Double.valueOf(currentValue.toString()));
+            }
+            catch(NumberFormatException e) {
+            	System.out.println("No se encuentra el formato correcto en Importe " + currentValue.toString() );
+            	e.printStackTrace();
+            }
+        }
 
         if (qName.equalsIgnoreCase("Empresa")) {
             result.add(empresa);
             //System.out.println("grabó");
+        }
+        
+        if (qName.equalsIgnoreCase("Movimiento")) {
+        	//System.out.println(movimiento.getNroContrato());
+            result2.add(movimiento);
+            
         }
 
     }

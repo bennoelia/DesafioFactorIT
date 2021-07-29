@@ -13,7 +13,6 @@
 	    <SaldoCtaCte>-21802.12</SaldoCtaCte>
         <Tipo>C</Tipo>
         <CodigoMovimiento>1</CodigoMovimiento>
-        <Concepto>Pago</Concepto>
         <Importe>21802.19</Importe>
       </Movimiento>
     </Movimientos>
@@ -31,7 +30,7 @@
     <CIIU>612030</CIIU>
     <Movimientos>
       <Movimiento>
-	   <SaldoCtaCte>-46791.12</SaldoCtaCte>
+	   <SaldoCtaCte>aa</SaldoCtaCte>
        <Tipo>C</Tipo>
         <CodigoMovimiento>1</CodigoMovimiento>
         <Concepto>Pago</Concepto>

@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import com.example.demo.Modelo.Empresa;
+import com.example.demo.Modelo.Movimiento;
 import com.example.demo.Servicio.EmpresaServicio;
 import com.example.demo.Controlador.CustomErrorHandlerSax;
 import com.example.demo.Controlador.ExcelControlador;
@@ -58,6 +59,14 @@ public class DesafioFactorItApplication {
                 	System.out.println(empresa.validarCampos());}
             }
             
+            // print all
+            List<Movimiento> result2 = handler.getResult2();
+            for (Movimiento movimiento : result2) {
+                System.out.println(movimiento.getSaldoCtaCte());
+                if (movimiento.validarCampos()!=("")){
+                	System.out.println(movimiento.validarCampos());}
+            }
+            
             //llamo al excel
             ExcelControlador myReport = new ExcelControlador();
             myReport.exportToExcel(result);
@@ -71,7 +80,7 @@ public class DesafioFactorItApplication {
 
     // get XML file from resources folder.
     private static InputStream getXMLFileAsStream() {
-        return DesafioFactorItApplication.class.getClassLoader().getResourceAsStream("Examen-FIT.xml");
+        return DesafioFactorItApplication.class.getClassLoader().getResourceAsStream("Examen-FIT2.xml");
     }
 
 }
