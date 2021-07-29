@@ -43,4 +43,15 @@ public class Empresa {
 	public void setPRODUCTOR(String pRODUCTOR) {
 		PRODUCTOR = pRODUCTOR;
 	} 
+	public String validarCampos() {
+		String faltan="";
+		if (this.getNroContrato()==null) {
+			faltan="Nro Contrato";
+		}
+		if (this.getDENOMINACION()==null) {
+			faltan=faltan + "-" + "Denominacion";
+		}
+		
+		return "Faltan los campos: " + faltan;
+	}
 	}

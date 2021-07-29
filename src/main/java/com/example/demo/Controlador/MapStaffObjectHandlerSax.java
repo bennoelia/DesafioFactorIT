@@ -1,6 +1,7 @@
 package com.example.demo.Controlador;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.example.demo.Modelo.Empresa;
@@ -31,10 +32,9 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
             String uri,
             String localName,
             String qName,
-            Attributes attributes) {
+            Attributes attributes)throws SAXException {
 
-    	//inicializo el contador
-    	Long contador=(long) 0;
+    	
         // reset the tag value
         currentValue.setLength(0);
       
@@ -42,35 +42,26 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
         //System.out.println(qName);
         
         // start of loop
-        if (qName.equalsIgnoreCase("NroContrato")) {
-
-            // new Empresa
-            empresa = new Empresa();
-
-            //se hace un contador para el id, ya que no se posee el atributo NroContrato=
-            //String id = attributes.getValue("NroContrato");--> no retorna nada
-            contador=contador+1;
-            empresa.setNroContrato(contador);
-            
-            //Set all required attributes in any XML element here itself
-            
+        if (qName.equalsIgnoreCase("Empresa")) {
+        	empresa = new Empresa();
         }
 
-        /*if (qName.equalsIgnoreCase("salary")) {
-            // salary currency
-            String currency = attributes.getValue("currency");
-            currentStaff.setCurrency(currency);
-        }*/
-
+        
     }
 
     public void endElement(String uri,
                            String localName,
-                           String qName) {
+                           String qName)throws SAXException {
 
-    	/*if (qName.equalsIgnoreCase("NroContrato")) {
-            empresa.setNroContrato(Long.parseLong(currentValue.toString()));
-        }*/
+    	if (qName.equalsIgnoreCase("NroContrato")) {
+            try {
+            	empresa.setNroContrato(Long.parseLong(currentValue.toString()));
+            }
+            catch(NumberFormatException e) {
+            	System.out.println("No se encuentra el formato correcto en Nro Contrato " + currentValue.toString() );
+            	e.printStackTrace();
+            }
+        }
         if (qName.equalsIgnoreCase("CUIT")) {
             empresa.setCUIT(currentValue.toString());
         }
@@ -84,7 +75,13 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
         }
 
         if (qName.equalsIgnoreCase("CodigoPostal")) {
-        	empresa.setCODIGOPOSTAL(Long.valueOf(currentValue.toString()));
+        	try {
+        		empresa.setCODIGOPOSTAL(Long.valueOf(currentValue.toString()));
+            }
+            catch(NumberFormatException e) {
+            	System.out.println("No se encuentra el formato correcto en CodigoPostal " + currentValue.toString() );
+            	e.printStackTrace();
+            }
         }
         
         if (qName.equalsIgnoreCase("Productor")) {
@@ -99,7 +96,7 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
 
     }
 
-    public void characters(char ch[], int start, int length) {
+    public void characters(char ch[], int start, int length)throws SAXException {
         currentValue.append(ch, start, length);
 
     }
