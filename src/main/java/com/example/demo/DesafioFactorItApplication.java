@@ -2,7 +2,9 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import com.example.demo.Modelo.Empresa;
+import com.example.demo.Servicio.EmpresaServicio;
 import com.example.demo.Controlador.CustomErrorHandlerSax;
+import com.example.demo.Controlador.ExcelControlador;
 import com.example.demo.Controlador.MapStaffObjectHandlerSax;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.xml.sax.InputSource;
@@ -47,11 +49,18 @@ public class DesafioFactorItApplication {
             
             // print all
             List<Empresa> result = handler.getResult();
+            //EmpresaServicio serv=new EmpresaServicio();
+            
             //result.forEach(System.out::println);
             for (Empresa empresa : result) {
                 System.out.println(empresa.getDENOMINACION());
-                System.out.println(empresa.validarCampos());
+                if (empresa.validarCampos()!=("")){
+                	System.out.println(empresa.validarCampos());}
             }
+            
+            //llamo al excel
+            ExcelControlador myReport = new ExcelControlador();
+            myReport.exportToExcel(result);
            
 
         } catch (ParserConfigurationException | SAXException |  IOException e) {
@@ -62,7 +71,7 @@ public class DesafioFactorItApplication {
 
     // get XML file from resources folder.
     private static InputStream getXMLFileAsStream() {
-        return DesafioFactorItApplication.class.getClassLoader().getResourceAsStream("Examen-FIT2.xml");
+        return DesafioFactorItApplication.class.getClassLoader().getResourceAsStream("Examen-FIT.xml");
     }
 
 }

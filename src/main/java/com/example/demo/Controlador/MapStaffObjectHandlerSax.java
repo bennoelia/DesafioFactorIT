@@ -53,6 +53,7 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
                            String localName,
                            String qName)throws SAXException {
 
+    	
     	if (qName.equalsIgnoreCase("NroContrato")) {
             try {
             	empresa.setNroContrato(Long.parseLong(currentValue.toString()));
@@ -60,7 +61,7 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
             catch(NumberFormatException e) {
             	System.out.println("No se encuentra el formato correcto en Nro Contrato " + currentValue.toString() );
             	e.printStackTrace();
-            }
+            }    
         }
         if (qName.equalsIgnoreCase("CUIT")) {
             empresa.setCUIT(currentValue.toString());
@@ -88,7 +89,6 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
         	empresa.setPRODUCTOR(currentValue.toString());
         }
 
-        // end of loop
         if (qName.equalsIgnoreCase("Empresa")) {
             result.add(empresa);
             //System.out.println("grabó");

@@ -1,5 +1,9 @@
 package com.example.demo.Modelo;
 
+import java.awt.List;
+import java.util.ArrayList;
+
+
 public class Empresa {
 	private Long NroContrato;
 	private String CUIT;
@@ -52,6 +56,13 @@ public class Empresa {
 			faltan=faltan + "-" + "Denominacion";
 		}
 		
-		return "Faltan los campos: " + faltan;
+		if (faltan.equals("")) {
+			return faltan;
+		}
+		else
+			{return "Faltan los campos: " + faltan;}
 	}
+	
+	
+	
 	}
