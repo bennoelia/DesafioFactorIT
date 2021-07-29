@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.Modelo.Empresa;
 import com.example.demo.Modelo.EmpresasMovsExcelExporter;
+import com.example.demo.Modelo.Movimiento;
 import com.example.demo.Servicio.EmpresaServicio;
  
 @Controller
@@ -26,7 +27,7 @@ public class ExcelControlador {
     @GetMapping("/users/export/excel")// ver si uso esta opción
     //public void exportToExcel(HttpServletResponse response,
     public void exportToExcel(
-    						List<Empresa> listEmpresas) throws IOException {
+    						List<Empresa> listEmpresas,List<Movimiento> listMovimiento) throws IOException {
         //response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
@@ -37,7 +38,7 @@ public class ExcelControlador {
         
         //List<Empresa> listEmpresas = service.listAll(listEmpresas);
          
-        EmpresasMovsExcelExporter excelExporter = new EmpresasMovsExcelExporter(listEmpresas);
+        EmpresasMovsExcelExporter excelExporter = new EmpresasMovsExcelExporter(listEmpresas,listMovimiento);
          
         //excelExporter.export(response);
         excelExporter.export();

@@ -69,7 +69,7 @@ public class DesafioFactorItApplication {
             
             //llamo al excel
             ExcelControlador myReport = new ExcelControlador();
-            myReport.exportToExcel(result);
+            myReport.exportToExcel(result,result2);
            
 
         } catch (ParserConfigurationException | SAXException |  IOException e) {
@@ -80,7 +80,7 @@ public class DesafioFactorItApplication {
 
     // get XML file from resources folder.
     private static InputStream getXMLFileAsStream() {
-        return DesafioFactorItApplication.class.getClassLoader().getResourceAsStream("Examen-FIT2.xml");
+        return DesafioFactorItApplication.class.getClassLoader().getResourceAsStream("Examen-FIT.xml");
     }
 
 }
