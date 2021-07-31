@@ -13,6 +13,8 @@ import org.xml.sax.XMLReader;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -42,16 +44,18 @@ public class DesafioFactorItApplication {
             List<Empresa> result = handler.getResult();
             //EmpresaServicio serv=new EmpresaServicio();
             //result.forEach(System.out::println);
+            System.out.println("*******************Empresas***************************");
             for (Empresa empresa : result) {
-                System.out.println(empresa.getDENOMINACION());
+                System.out.println("Nro Contrato: " + empresa.getNroContrato() + "- Denominación: " + empresa.getDENOMINACION());
                 if (empresa.validarCampos()!=("")){
                 	System.out.println(empresa.validarCampos());}
             }
             
             //se imprime en Consola los movimientos
             List<Movimiento> result2 = handler.getResult2();
+            System.out.println("*******************Movimientos por Nro Contrato***************************");
             for (Movimiento movimiento : result2) {
-                System.out.println(movimiento.getSaldoCtaCte());
+                System.out.println("Nro Contrato: " + movimiento.getNroContrato() + "- Saldo Cta Cte: " +movimiento.getSaldoCtaCte());
                 if (movimiento.validarCampos()!=("")){
                 	System.out.println(movimiento.validarCampos());}
             }
@@ -59,6 +63,10 @@ public class DesafioFactorItApplication {
             //Generación del excel
             ExcelControlador myReport = new ExcelControlador();
             myReport.exportToExcel(result,result2);
+            File file = new File("");
+    		String directoryName = file.getAbsoluteFile().toString();
+    		System.out.println("**************************El Excel fue generado en: " +directoryName);
+            
            
 
         } catch (ParserConfigurationException | SAXException |  IOException e) {
