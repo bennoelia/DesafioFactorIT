@@ -20,33 +20,22 @@ class DesafioFactorItApplicationTests {
 
     //@Before
 	void contextLoads() {
-		System.out.println("Se genera el Excel en base a Examen-FIT.xml");
-		/*File currDir = new File(".");
-        String path = currDir.getAbsolutePath();
-        fileLocation = path.substring(0, path.length() - 1) + FILE_NAME;
-
-        excelPOIHelper = new ExcelPOIHelper();
-        excelPOIHelper.writeExcel();*/
-		
+				
 	}
 	
 	@Test
     public void whenParsingPOIExcelFile_thenCorrect() throws IOException {
-		System.out.println("El Excel se generó correctamente");
-		System.out.println("Se genera el Excel en base a Examen-FIT.xml");
+		System.out.println("El Excel fue generado- Inicio de Prueba Unitaria");
 		File currDir = new File(".");
         String path = currDir.getAbsolutePath();
         fileLocation = path.substring(0, path.length() - 1) + FILE_NAME;
         excelPOIHelper = new ExcelPOIHelper();
-        //excelPOIHelper.writeExcel();
-		
 		Map<Integer, List<String>> data
         = excelPOIHelper.readExcel(fileLocation);
 		 assertEquals("NroContrato", data.get(0).get(0));
 	     assertEquals("CUIT", data.get(0).get(1));
-	     assertEquals("CUIT", data.get(0).get(2));
-	     //assertEquals("John Smith", data.get(1).get(0));
-	     //assertEquals("20", data.get(1).get(1));
+	     //assertEquals("CUIT", data.get(0).get(2));
+	     assertEquals("111111111111", data.get(1).get(1));
 
 	}
 	

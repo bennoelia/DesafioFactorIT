@@ -14,9 +14,11 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+//Clase encargada de la lectura de un Excel cuya ruta se recibe como parámetro.
+//Esta clase fue creada específicamente para el desarrollo de la prueba unitaria.
+
 public class ExcelPOIHelper {
 	public Map<Integer, List<String>> readExcel(String fileLocation) throws IOException {
-		System.out.println("Ingresó");
     	FileInputStream file = new FileInputStream(new File(fileLocation));
         Workbook workbook = new XSSFWorkbook(file);
         Sheet sheet = workbook.getSheetAt(0);
@@ -28,6 +30,7 @@ public class ExcelPOIHelper {
             for (Cell cell : row) {
                 switch (cell.getCellType()) {
                     case STRING: data.get(new Integer(i)).add(cell.getRichStringCellValue().getString()); break;
+                    //por cuestiones de tiempo no llegué a codificar las opción para todos los tipos de datos
                     /*case NUMERIC: ... break;
                     case BOOLEAN: ... break;
                     case FORMULA: ... break;*/

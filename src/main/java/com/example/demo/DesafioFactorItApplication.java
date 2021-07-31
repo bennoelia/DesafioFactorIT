@@ -25,30 +25,22 @@ public class DesafioFactorItApplication {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 
         try (InputStream is = getXMLFileAsStream()) {
-
-            SAXParser saxParser = factory.newSAXParser();
-
+        	
+        	SAXParser saxParser = factory.newSAXParser();
             // parse XML and map to object, it works, but not recommend, try JAXB
             MapStaffObjectHandlerSax handler = new MapStaffObjectHandlerSax();
-
             //saxParser.parse(is, handler);
-            
             // more options for configuration
             XMLReader xmlReader = saxParser.getXMLReader();
-
             // set our custom error handler
             xmlReader.setErrorHandler(new CustomErrorHandlerSax(System.err));
-
             xmlReader.setContentHandler(handler);
-
             InputSource source = new InputSource(is);
-
             xmlReader.parse(source);
             
-            // print all
+            // se imprime en Consola las Empresas
             List<Empresa> result = handler.getResult();
             //EmpresaServicio serv=new EmpresaServicio();
-            
             //result.forEach(System.out::println);
             for (Empresa empresa : result) {
                 System.out.println(empresa.getDENOMINACION());
@@ -56,7 +48,7 @@ public class DesafioFactorItApplication {
                 	System.out.println(empresa.validarCampos());}
             }
             
-            // print all
+            //se imprime en Consola los movimientos
             List<Movimiento> result2 = handler.getResult2();
             for (Movimiento movimiento : result2) {
                 System.out.println(movimiento.getSaldoCtaCte());
@@ -64,7 +56,7 @@ public class DesafioFactorItApplication {
                 	System.out.println(movimiento.validarCampos());}
             }
             
-            //llamo al excel
+            //Generación del excel
             ExcelControlador myReport = new ExcelControlador();
             myReport.exportToExcel(result,result2);
            

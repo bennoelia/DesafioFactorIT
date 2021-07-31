@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  
+//Clase encargada de Generar el Excel a partir de las listas de Empresas y Movimientos
 public class EmpresasMovsExcelExporter {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
@@ -25,16 +26,13 @@ public class EmpresasMovsExcelExporter {
  
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Empresas");
-         
         Row row = sheet.createRow(0);
-         
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
         font.setFontHeight(16);
         style.setFont(font);
        
-         
         createCell(row, 0, "NroContrato", style);      
         createCell(row, 1, "CUIT", style);       
         createCell(row, 2, "DENOMINACION", style);    
@@ -46,16 +44,13 @@ public class EmpresasMovsExcelExporter {
     
     private void writeHeaderLine2() {
         sheet = workbook.createSheet("Movimientos");
-         
         Row row = sheet.createRow(0);
-         
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
         font.setFontHeight(16);
         style.setFont(font);
-       
-         
+                
         createCell(row, 0, "NroContrato", style);      
         createCell(row, 1, "SaldoCtaCte", style);       
         createCell(row, 2, "Concepto", style);    
@@ -86,7 +81,6 @@ public class EmpresasMovsExcelExporter {
      
     private void writeDataLines() {
         int rowCount = 1;
- 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
@@ -108,7 +102,6 @@ public class EmpresasMovsExcelExporter {
     
     private void writeDataLines2() {
         int rowCount = 1;
- 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
@@ -136,8 +129,7 @@ public class EmpresasMovsExcelExporter {
         
         //ServletOutputStream outputStream = response.getOutputStream();
         //workbook.write(outputStream);
-        //workbook.close();
-         
+        //workbook.close();  
         //outputStream.close();
         
         OutputStream fileOut=new FileOutputStream("excel.xlsx");

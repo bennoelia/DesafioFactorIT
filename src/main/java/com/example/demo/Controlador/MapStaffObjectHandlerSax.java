@@ -11,9 +11,8 @@ import com.example.demo.Modelo.Movimiento;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//Clase encargada del Parseo del XML
 public class MapStaffObjectHandlerSax extends DefaultHandler {
-
     private StringBuilder currentValue = new StringBuilder();
     List<Empresa> result;
     Empresa empresa;
@@ -56,7 +55,7 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
         	empresa = new Empresa();
         }
         
-     // start of loop Movimientos
+        // start of loop Movimientos
         if (qName.equalsIgnoreCase("Movimiento")) {
         	movimiento = new Movimiento();
         }
@@ -76,14 +75,7 @@ public class MapStaffObjectHandlerSax extends DefaultHandler {
             catch(NumberFormatException e) {
             	System.out.println("No se encuentra el formato correcto en Nro Contrato " + currentValue.toString() );
             	e.printStackTrace();
-            }    
-            /*try {
-            	movimiento.setNroContrato(Long.parseLong(currentValue.toString()));
-            }
-            catch(NumberFormatException e) {
-            	System.out.println("No se encuentra el formato correcto en Nro Contrato " + currentValue.toString() );
-            	e.printStackTrace();
-            }   */ 
+            }          
         }
         if (qName.equalsIgnoreCase("CUIT")) {
             empresa.setCUIT(currentValue.toString());

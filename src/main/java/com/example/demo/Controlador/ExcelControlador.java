@@ -13,6 +13,8 @@ import com.example.demo.Modelo.Empresa;
 import com.example.demo.Modelo.EmpresasMovsExcelExporter;
 import com.example.demo.Modelo.Movimiento;
 
+//Clase encargada de gestionar la petición de generación del Excel, 
+//instanciando un objeto de la clase EmpresasMovsExcelExporter con las listas de Empresas y Movimientos.
  
 @Controller
 public class ExcelControlador {
@@ -21,22 +23,19 @@ public class ExcelControlador {
     //private EmpresaServicio service;
      
      
-    @GetMapping("/users/export/excel")// ver si uso esta opción
+    @GetMapping("/export/excel")
     //public void exportToExcel(HttpServletResponse response,
-    public void exportToExcel(
-    						List<Empresa> listEmpresas,List<Movimiento> listMovimiento) throws IOException {
-        //response.setContentType("application/octet-stream");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-         
+    public void exportToExcel(List<Empresa> listEmpresas,List<Movimiento> listMovimiento) throws IOException {
+    	/*se deja en comentario otras opciones de código
+    	//response.setContentType("application/octet-stream");
+        //DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        //String currentDateTime = dateFormatter.format(new Date());
         //String headerKey = "Content-Disposition";
         //String headerValue = "attachment; filename=EmpresasMovs_" + currentDateTime + ".xlsx";
         //response.setHeader(headerKey, headerValue);
-        
-        //List<Empresa> listEmpresas = service.listAll(listEmpresas);
+        //List<Empresa> listEmpresas = service.listAll(listEmpresas);*/
          
         EmpresasMovsExcelExporter excelExporter = new EmpresasMovsExcelExporter(listEmpresas,listMovimiento);
-         
         //excelExporter.export(response);
         excelExporter.export();
     }  

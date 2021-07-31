@@ -52,6 +52,15 @@ public class Empresa {
 		if (this.getDENOMINACION()==null) {
 			faltan=faltan + "-" + "Denominacion";
 		}
+		if (this.getDOMICILIO()==null) {
+			faltan=faltan + "-" + "Domiclio";
+		}
+		if (this.getCODIGOPOSTAL()==null) {
+			faltan=faltan + "-" + "Código Postal";
+		}
+		if (this.getPRODUCTOR()==null) {
+			faltan=faltan + "-" + "Productor";
+		}
 		
 		if (faltan.equals("")) {
 			return faltan;

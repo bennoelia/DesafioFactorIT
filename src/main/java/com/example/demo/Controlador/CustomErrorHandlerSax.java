@@ -5,9 +5,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import java.io.PrintStream;
-
+//Clase encargada del manejo de Excepciones en el parseo del XML.
 public class CustomErrorHandlerSax implements ErrorHandler {
-
     private PrintStream out;
 
     public CustomErrorHandlerSax(PrintStream out) {
