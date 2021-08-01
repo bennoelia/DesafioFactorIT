@@ -5,6 +5,8 @@ import com.example.demo.Modelo.Movimiento;
 import com.example.demo.Controlador.CustomErrorHandlerSax;
 import com.example.demo.Controlador.ExcelControlador;
 import com.example.demo.Controlador.MapStaffObjectHandlerSax;
+
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -67,6 +69,7 @@ public class DesafioFactorItApplication {
     		String directoryName = file.getAbsoluteFile().toString();
     		System.out.println("**************************El Excel fue generado en: " +directoryName);
             
+    		 SpringApplication.run(DesafioFactorItApplication.class, args);
            
 
         } catch (ParserConfigurationException | SAXException |  IOException e) {
